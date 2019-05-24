@@ -2,6 +2,12 @@ class pointer:
 	def __init__(self, node):
 		self.points_to = node
 
+	def points_to_none(self):
+		if(self.points_to == None):
+			return true
+		else:
+			return false
+
 
 class node:
 	def __init__(self, input):
@@ -28,7 +34,9 @@ class linked_list:
 
 #TODO: implement case when node to remove is the last node or if only one node and that node not equal to input
 	def remove_node(self, input):
+		#if node to remove is the first node
 		if(self.start.value == input):
+			#if first node is not the only node
 			if(self.start.next_p.points_to is not None):
 				temp = self.start
 				self.start = self.start.next_node()
@@ -45,7 +53,10 @@ class linked_list:
 				else:
 					current_node = nxt_node
 					nxt_node = nxt_node.next_node()
-			
+			if(nxt_node.next_p.points_to is None and nxt_node.value == input):
+				current_node.next_p.points_to = None
+				nxt_node.next_p = None
+		#TODO: should the node that is removed be set to None or should you just set their pointer to None??
 
 
 	def display_data(self):
@@ -64,5 +75,5 @@ test.add_node('2')
 test.add_node('3')
 test.add_node('4')
 test.display_data()
-test.remove_node('3')
+test.remove_node('1')
 test.display_data()
